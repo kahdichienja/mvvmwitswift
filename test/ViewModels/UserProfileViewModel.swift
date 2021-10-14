@@ -6,16 +6,22 @@
 //  Copyright © 2021 AGO. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
 
-struct UserProfileViewModel: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+
+final class UserProflieViewModel: ObservableObject{
+     @Published var username = ""
+    
+    private let repository: UserRepositoryProtocal
+    
+    init(repository: UserRepositoryProtocal = UserRepository()) {
+        self.repository = repository
     }
-}
-
-struct UserProfileViewModel_Previews: PreviewProvider {
-    static var previews: some View {
-        UserProfileViewModel()
+    
+    func onAppear() {
+        repository.fetchUser{
+            user in
+            self.username = user.username
+        }
     }
 }

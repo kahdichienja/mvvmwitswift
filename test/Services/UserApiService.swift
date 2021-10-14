@@ -7,3 +7,16 @@
 //
 
 import Foundation
+
+
+
+
+protocol UserApiServiceProtocal {
+    func fetchUser(completion: (User) -> Void )
+}
+
+final class UserApiService: UserApiServiceProtocal{
+    func fetchUser(completion: (User) -> Void) {
+        completion(.init(username: "James")) 
+    }
+}

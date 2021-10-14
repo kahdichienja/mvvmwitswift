@@ -9,8 +9,22 @@
 import SwiftUI
 
 struct UserProfileView: View {
+    
+    @State private var viewmodel =  UserProflieViewModel()
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack {
+            HStack {
+                Text("Name: \(viewmodel.username)")
+                Spacer()
+                
+            }
+        }
+        .padding()
+        .onAppear{
+            self.viewmodel.onAppear()
+        }
+        .navigationBarTitle("User Profile")
     }
 }
 

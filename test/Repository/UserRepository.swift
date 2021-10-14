@@ -6,16 +6,28 @@
 //  Copyright © 2021 AGO. All rights reserved.
 //
 
-import SwiftUI
+import Foundation
 
-struct UserRepository: View {
-    var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
-    }
+
+
+
+protocol UserRepositoryProtocal {
+    func fetchUser(completion: (User) -> Void )
 }
 
-struct UserRepository_Previews: PreviewProvider {
-    static var previews: some View {
-        UserRepository()
+
+
+final class UserRepository: UserRepositoryProtocal{
+    // fetch from API service
+    private let apiService : UserApiServiceProtocal
+    
+    
+    init(apiService: UserApiServiceProtocal = UserApiService() ) {
+        self.apiService = apiService
     }
+    func fetchUser(completion: (User) -> Void) {
+        apiService.fetchUser(completion:  completion )
+    }
+    
+    
 }
